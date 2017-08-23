@@ -2,3 +2,4 @@ proj.sublime-*
 vendor
 cache
 composer.lock
+uploads

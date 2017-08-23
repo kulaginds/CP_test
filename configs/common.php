@@ -1,0 +1,3 @@
+<?
+
+$config['settings']['displayErrorDetails'] = true;
