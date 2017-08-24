@@ -13,12 +13,12 @@
 				Сортировка по номеру 1-9
 			</button>
 			<div class="dropdown-menu" aria-labelledby="sortMenuButton">
-				<a class="dropdown-item active" href="#">номеру 1-9</a>
-				<a class="dropdown-item" href="#">номеру 9-1</a>
-				<a class="dropdown-item" href="#">имени А-Я</a>
-				<a class="dropdown-item" href="#">имени Я-А</a>
-				<a class="dropdown-item" href="#">фамилии А-Я</a>
-				<a class="dropdown-item" href="#">фамилии Я-А</a>
+				<a class="dropdown-item{% if sort=='id_asc' %} active{% endif %}" href="{{ path_for('contact_list', [], { 'sort': 'id_asc' }) }}">номеру 1-9</a>
+				<a class="dropdown-item{% if sort=='id_desc' %} active{% endif %}" href="{{ path_for('contact_list', [], { 'sort': 'id_desc' }) }}">номеру 9-1</a>
+				<a class="dropdown-item{% if sort=='first_name_asc' %} active{% endif %}" href="{{ path_for('contact_list', [], { 'sort': 'first_name_asc' }) }}">имени А-Я</a>
+				<a class="dropdown-item{% if sort=='first_name_desc' %} active{% endif %}" href="{{ path_for('contact_list', [], { 'sort': 'first_name_desc' }) }}">имени Я-А</a>
+				<a class="dropdown-item{% if sort=='last_name_asc' %} active{% endif %}" href="{{ path_for('contact_list', [], { 'sort': 'last_name_asc' }) }}">фамилии А-Я</a>
+				<a class="dropdown-item{% if sort=='last_name_desc' %} active{% endif %}" href="{{ path_for('contact_list', [], { 'sort': 'last_name_desc' }) }}">фамилии Я-А</a>
 			</div>
 		</div>
 	</div>
@@ -46,11 +46,14 @@
 
 <br>
 
-<nav>
-	<ul class="pagination justify-content-end">
-		<li class="page-item active"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-	</ul>
-</nav>
+{% if pagination.needed %}
+	<nav>
+		<ul class="pagination">
+		{% for i in 1..pagination.lastpage %}
+            <li class="page-item{% if i == pagination.page %} active{% endif %}"><a class="page-link" href="{{ path_for('contact_list', [], { 'sort':sort, 'page': i }) }}">{{ i }}</a></li>
+        {% endfor %}
+		</ul>
+	</nav>
+{% endif %}
+
 {% endblock %}

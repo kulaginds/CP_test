@@ -17,18 +17,10 @@
 				<nav>
 					<ul class="nav nav-pills float-right">
 						<li class="nav-item">
-							{% if item_name == 'contact_list' %}
-							<a class="nav-link active" href="{{ path_for('contact_list') }}">Мои контакты</a>
-							{% else %}
-							<a class="nav-link" href="{{ path_for('contact_list') }}">Мои контакты</a>
-							{% endif %}
+							<a class="nav-link{% if item_name == 'contact_list' %} active{% endif %}" href="{{ path_for('contact_list') }}">Мои контакты</a>
 						</li>
 						<li class="nav-item">
-							{% if item_name == 'add_contact' %}
-							<a class="nav-link active" href="{{ path_for('add_contact') }}">Добавить контакт</a>
-							{% else %}
-							<a class="nav-link" href="{{ path_for('add_contact') }}">Добавить контакт</a>
-							{% endif %}
+							<a class="nav-link{% if item_name == 'add_contact' %} active{% endif %}" href="{{ path_for('add_contact') }}">Добавить контакт</a>
 						</li>
 					</ul>
 				</nav>

@@ -7,9 +7,57 @@ use Slim\Http\UploadedFile as UploadedFile;
 class HomeController extends AbstractController
 {
 	public function get_index_action(Request $request, Response $response) {
-		$contacts = $this->table->take(25)->get();
+		$sort = $request->getQueryParam('sort');
+		$page = ($request->getQueryParam('page', 0) > 0) ? $request->getQueryParam('page') : 1;
 
-		return $this->view->render($response, 'page/index.twig', ['contacts' => $contacts, 'upload_directory' => $this->container->get('upload_directory')]);
+		// pagination
+		$limit      = $this->container->get('settings')['pagination']['per_page'];
+		$skip       = ($page - 1) * $limit;
+		$count      = $this->table->getCountForPagination(); // Count of all available posts
+		$pagination = [
+			'needed'        => $count > $limit,
+            'count'         => $count,
+            'page'          => $page,
+            'lastpage'      => (ceil($count / $limit) == 0 ? 1 : ceil($count / $limit)),
+            'limit'         => $limit,
+		];
+
+		switch ($sort) {
+			case 'first_name_asc':
+				$field     = 'first_name';
+				$direction = 'asc';
+				break;
+			case 'first_name_desc':
+				$field     = 'first_name';
+				$direction = 'desc';
+				break;
+			case 'last_name_asc':
+				$field     = 'last_name';
+				$direction = 'asc';
+				break;
+			case 'last_name_desc':
+				$field     = 'last_name';
+				$direction = 'desc';
+				break;
+			case 'id_desc':
+				$field     = 'id';
+				$direction = 'desc';
+				break;
+			default:
+				$sort      = 'id_asc';
+				$field     = 'id';
+				$direction = 'asc';
+				break;
+		}
+
+		$contacts = $this->table->orderBy($field, $direction)->skip($skip)->limit($limit)->get();
+
+		return $this->view->render($response, 'page/index.twig', [
+			'contacts' => $contacts,
+			'upload_directory' => $this->container->get('upload_directory'),
+			'sort' => $sort,
+			'pagination' => $pagination,
+		]);
 	}
 
 	public function get_create_action(Request $request, Response $response) {
