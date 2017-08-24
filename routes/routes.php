@@ -1,7 +1,12 @@
 <?
 
-$app->get('/', '\HomeController:get_index_action')->setName('contact_list');
+use \DavidePastore\Slim\Validation\Validation as Validation;
 
-$app->get('/create/', '\HomeController:get_create_action')->setName('add_contact');
-$app->post('/create/', '\HomeController:post_create_action');
+$app->get('/', HomeController::class . ':get_index_action')
+	->setName('contact_list');
+
+$app->get('/create/', HomeController::class . ':get_create_action')
+	->setName('add_contact');
+$app->post('/create/', HomeController::class . ':post_create_action')
+	->add(new Validation($create_validators));
 

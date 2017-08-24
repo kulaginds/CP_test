@@ -5,36 +5,67 @@
 {% block content %}
 <h1>Добавить новый контакт</h1>
 
+{% if success %}
 <div class="alert alert-success" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 	</button>
-	This is a success alert—check it out!
+	Контакт успешно добавлен!
 </div>
+{% endif %}
+{% if error %}
 <div class="alert alert-danger" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 	</button>
-	This is a danger alert—check it out!
+	{{ error }}
 </div>
+{% endif %}
 
 <form action="{{ path_for('add_contact') }}" method="POST" enctype="multipart/form-data">
 	<div class="form-group">
-		<label for="first_name">Имя:</label>
-		<input type="text" class="form-control" id="first_name" name="first_name">
+		<label for="first_name">Имя * :</label>
+		<input type="text" class="form-control" id="first_name" name="first_name" value="{{ first_name }}" required>
+		{% if errors|length > 0 and errors.first_name is defined %}
+		<small class="form-text text-danger">
+		{% for error in errors.first_name %}
+		    {{ error }}<br>
+		{% endfor %}
+		</small>
+		{% endif %}
 	</div>
 	<div class="form-group">
-		<label for="last_name">Фамилия:</label>
-		<input type="text" class="form-control" id="last_name" name="last_name">
+		<label for="last_name">Фамилия * :</label>
+		<input type="text" class="form-control" id="last_name" name="last_name" value="{{ last_name }}" required>
+		{% if errors|length > 0 and errors.last_name is defined %}
+		<small class="form-text text-danger">
+		{% for error in errors.last_name %}
+		    {{ error }}<br>
+		{% endfor %}
+		</small>
+		{% endif %}
 	</div>
 	<div class="form-group">
-		<label for="email">Email address</label>
-		<input type="email" class="form-control" id="email" name="email">
+		<label for="email">E-mail * :</label>
+		<input type="email" class="form-control" id="email" name="email" value="{{ email }}" required>
+		{% if errors|length > 0 and errors.email is defined %}
+		<small class="form-text text-danger">
+		{% for error in errors.email %}
+		    {{ error }}<br>
+		{% endfor %}
+		</small>
+		{% endif %}
 	</div>
 	<div class="form-group">
-		<label for="phone">Телефон:</label>
-		<input type="text" class="form-control" id="phone" name="phone">
-		<small class="form-text text-muted">В формате 74991234567</small>
+		<label for="phone">Телефон * :</label>
+		<input type="text" class="form-control" id="phone" name="phone" value="{{ phone }}" required>
+		{% if errors|length > 0 and errors.phone is defined %}
+		<small class="form-text text-danger">
+		{% for error in errors.phone %}
+		    {{ error }}<br>
+		{% endfor %}
+		</small>
+		{% endif %}
 	</div>
 	<div class="form-group">
 		<label for="avatar">Фото:</label>
@@ -43,7 +74,14 @@
 	</div>
 	<div class="form-group">
 		<label for="comment">Комментарий:</label>
-		<textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
+		<textarea class="form-control" rows="3" id="comment" name="comment">{{ comment }}</textarea>
+		{% if errors|length > 0 and errors.comment is defined %}
+		<small class="form-text text-danger">
+		{% for error in errors.comment %}
+		    {{ error }}<br>
+		{% endfor %}
+		</small>
+		{% endif %}
 	</div>
 	<button type="submit" class="btn btn-primary">Добавить</button>
 </form>
