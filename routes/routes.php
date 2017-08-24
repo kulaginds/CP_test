@@ -10,3 +10,5 @@ $app->get('/create/', HomeController::class . ':get_create_action')
 $app->post('/create/', HomeController::class . ':post_create_action')
 	->add(new Validation($create_validators));
 
+$app->get("/photo/{id:.+}", HomeController::class . ':get_photo_action')
+	->setName('get_photo');

@@ -7,7 +7,9 @@ use Slim\Http\UploadedFile as UploadedFile;
 class HomeController extends AbstractController
 {
 	public function get_index_action(Request $request, Response $response) {
-		return $this->view->render($response, 'page/index.twig');
+		$contacts = $this->table->take(25)->get();
+
+		return $this->view->render($response, 'page/index.twig', ['contacts' => $contacts, 'upload_directory' => $this->container->get('upload_directory')]);
 	}
 
 	public function get_create_action(Request $request, Response $response) {

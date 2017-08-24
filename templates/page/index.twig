@@ -25,37 +25,24 @@
 </div>
 
 <br>
-
+{% for contact in contacts %}
 <div class="card">
-	<img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e107162ee%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e107162ee%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22117.015625%22%20y%3D%2297.2%22%3E318x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="" class="card-img-top">
+	<img src="{{ upload_directory }}/{{ contact.photo|default('no.gif') }}" alt="{{ contact.first_name }} {{ contact.last_name }}" class="card-img-top">
 	<div class="card-body">
-		<h4 class="card-title">#1 Имя Фамилия</h4>
-		<p><b>E-mail</b>: email@company.com</p>
-		<p><b>Телефон</b>: +7 (978) 123-45-67</p>
+		<h4 class="card-title">#{{ contact.id }} {{ contact.first_name }} {{ contact.last_name }}</h4>
+		<p><b>E-mail</b>: {{ contact.email }}</p>
+		<p><b>Телефон</b>: {{ contact.phone }}</p>
 		<p><b>Комментарий</b>:</p>
-		<blockquote>олололо</blockquote>
+		{% if contact.comment is empty %}
+		<small><i>Нет</i></small>
+		{% else %}
+		<pre>{{ contact.comment }}</pre>
+		{% endif %}
 	</div>
 </div>
-<div class="card">
-	<img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e107162ee%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e107162ee%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22117.015625%22%20y%3D%2297.2%22%3E318x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="" class="card-img-top">
-	<div class="card-body">
-		<h4 class="card-title">#2 Имя Фамилия</h4>
-		<p><b>E-mail</b>: email@company.com</p>
-		<p><b>Телефон</b>: +7 (978) 123-45-67</p>
-		<p><b>Комментарий</b>:</p>
-		<blockquote>олололо</blockquote>
-	</div>
-</div>
-<div class="card">
-	<img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e107162ee%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e107162ee%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22117.015625%22%20y%3D%2297.2%22%3E318x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="" class="card-img-top">
-	<div class="card-body">
-		<h4 class="card-title">#3 Имя Фамилия</h4>
-		<p><b>E-mail</b>: email@company.com</p>
-		<p><b>Телефон</b>: +7 (978) 123-45-67</p>
-		<p><b>Комментарий</b>:</p>
-		<blockquote>олололо</blockquote>
-	</div>
-</div>
+{% else %}
+<p>Нет контактов.</p>
+{% endfor %}
 
 <br>
 
