@@ -30,7 +30,7 @@
 	{% if contact.photo is null %}
 	<img src="http://vk.com/images/deactivated_400.gif" alt="{{ contact.first_name }} {{ contact.last_name }}" class="card-img-top">
 	{% else %}
-	<img src="{{ upload_directory }}/{{ contact.photo }}" alt="{{ contact.first_name }} {{ contact.last_name }}" class="card-img-top">
+	<img src="{{ upload_directory }}{{ contact.photo }}" alt="{{ contact.first_name }} {{ contact.last_name }}" class="card-img-top">
 	{% endif %}
 	<div class="card-body">
 		<h4 class="card-title">#{{ contact.id }} {{ contact.first_name }} {{ contact.last_name }}</h4>

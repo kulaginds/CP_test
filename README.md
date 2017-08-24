@@ -18,11 +18,12 @@ ALTER TABLE `contact`
 ALTER TABLE `contact`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 ```
-2) Запустить команду:
+2) Прописать подключение к БД в файле configs/db.php
+3) Подтянуть зависимости с помощью Composer (https://getcomposer.org):
 ```
 composer install
 ```
-3) Для запуска веб-приложения из встроенного в PHP веб-сервера, запустите команду:
+4) Для запуска веб-приложения из встроенного в PHP веб-сервера, запустите команду:
 ```
 php -S localhost:8080
 ```
