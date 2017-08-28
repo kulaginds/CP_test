@@ -19,14 +19,8 @@ ALTER TABLE `contact`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 ```
 2) Прописать подключение к БД в файле configs/db.php
-3) Подтянуть зависимости с помощью Composer (https://getcomposer.org):
-```
-composer install
-```
-4) Для запуска веб-приложения из встроенного в PHP веб-сервера, запустите команду:
-```
-php -S localhost:8080
-```
 
 # Системные требования
-PHP >= 7.0
+PHP >= 5.3
+
+Разработка велась на софте Open Server (https://ospanel.io/).
