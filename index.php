@@ -1,14 +1,14 @@
 <?
 
-require 'vendor/autoload.php';
+// document root directory
+define('DOC', __DIR__);
 
-require_once __DIR__ . '/configs/loader.php';
+// application directory
+define('APP', DOC . '/application');
 
-$app = new \Slim\App($config);
+// system directory
+define('SYS', DOC . '/system');
 
-require_once __DIR__ . '/initializators/loader.php';
-require_once __DIR__ . '/controllers/loader.php';
-require_once __DIR__ . '/validators/loader.php';
-require_once __DIR__ . '/routes/routes.php';
+define('BOOTSTRAP_SCRIPT', str_replace(array(DOC, '\\'), array('', '/'), __FILE__));
 
-$app->run();
+require_once SYS . '/handler.php';
