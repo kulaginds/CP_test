@@ -68,16 +68,13 @@ abstract class Model
 
 		global $pdo;
 
-		$sql = 'SELECT * FROM ' . static::table() . ' ORDER BY :field :direction';
+		$sql = 'SELECT * FROM ' . static::table() . ' ORDER BY ' . $field . ' ' . $direction;
 
 		if ($limit > 0) {
 			$sql .= " LIMIT $offset, $limit";
 		}
 		
-		$stmt = $pdo->prepare($sql);
-		$stmt->bindParam(':field', $field);
-		$stmt->bindParam(':direction', $direction);
-		$stmt->execute();
+		$stmt = $pdo->query($sql);
 
 		$data = array();
 
