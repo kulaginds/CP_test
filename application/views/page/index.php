@@ -5,7 +5,26 @@
 	<div class="col-md-5">
 		<div class="dropdown text-right">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="sortMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Сортировка по номеру 1-9
+				Сортировка по
+				<? switch ($sort):
+					case 'id_desc':
+						echo 'номеру 9-1';
+					break;
+					case 'first_name_asc':
+						echo 'имени А-Я';
+					break;
+					case 'first_name_desc':
+						echo 'имени Я-А';
+					break;
+					case 'last_name_asc':
+						echo 'фамилии А-Я';
+					break;
+					case 'last_name_desc':
+						echo 'фамилии Я-А';
+					break;
+					default:
+						echo 'номеру 1-9';
+				endswitch; ?>
 			</button>
 			<div class="dropdown-menu" aria-labelledby="sortMenuButton">
 				<a class="dropdown-item<?if ($sort == 'id_asc'):?> active<? endif; ?>" href="<?=$this->addPathParams('/', array('sort' => 'id_asc' ))?>">номеру 1-9</a>
